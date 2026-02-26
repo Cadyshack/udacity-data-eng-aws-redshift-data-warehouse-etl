@@ -1,5 +1,5 @@
 import configparser
-import psycopg2
+import psycopg
 from sql_queries import create_table_queries, drop_table_queries
 
 
@@ -19,7 +19,7 @@ def main():
     config = configparser.ConfigParser()
     config.read('dwh.cfg')
 
-    conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
+    conn = psycopg.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
     cur = conn.cursor()
 
     drop_tables(cur, conn)
