@@ -1,0 +1,8 @@
+[project]
+name = "udacity-data-eng-aws-redshift-data-warehouse-etl"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "psycopg[binary]>=3.3.3",
+]
