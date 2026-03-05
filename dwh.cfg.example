@@ -1,14 +1,27 @@
+[AWS]
+KEY=
+SECRET=
+
 [CLUSTER]
-HOST=
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
-DB_PORT=
+HOST =
+DB_NAME = 
+DB_USER = 
+DB_PASSWORD = 
+DB_PORT = 5439
+CLUSTER_IDENTIFIER = cc-redshift-cluster
+CLUSTER_TYPE = multi-node
+NODE_TYPE = ra3.xlplus
+NUM_NODES = 2
 
 [IAM_ROLE]
-ARN=''
+ROLE_ARN = ''
+ROLE_NAME = ccRedshiftRole
+
+[SECURITY_GROUP]
+SG_NAME = redshift_security_group
+SG_ID =
 
 [S3]
-LOG_DATA='s3://udacity-dend/log_data'
-LOG_JSONPATH='s3://udacity-dend/log_json_path.json'
-SONG_DATA='s3://udacity-dend/song_data'
+LOG_DATA = 's3://udacity-dend/log_data'
+LOG_JSONPATH = 's3://udacity-dend/log_json_path.json'
+SONG_DATA = 's3://udacity-dend/song_data'
