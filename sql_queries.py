@@ -8,7 +8,6 @@ SONG_DATA = config.get('S3', 'SONG_DATA')
 ROLE_ARN = config.get('IAM_ROLE', 'ROLE_ARN')
 
 
-
 # DROP TABLES
 
 staging_events_table_drop = "DROP TABLE IF EXISTS events_data;"
@@ -27,17 +26,17 @@ staging_events_table_create= ("""
         auth VARCHAR,
         firstName VARCHAR,
         gender VARCHAR,
-        itemInSession INTEGER,
+        itemInSession SMALLINT,
         lastName VARCHAR,
-        length FLOAT,
+        length DOUBLE PRECISION,
         level VARCHAR,
         location VARCHAR,
         method VARCHAR,
         page VARCHAR,
-        registration FLOAT,
+        registration DOUBLE PRECISION,
         sessionId INTEGER,
         song VARCHAR,
-        status INTEGER,
+        status SMALLINT,
         ts BIGINT,
         userAgent VARCHAR,
         userId INTEGER
@@ -48,38 +47,44 @@ staging_songs_table_create = ("""
     CREATE TABLE IF NOT EXISTS song_data (
         num_songs INTEGER,
         artist_id VARCHAR,
-        artist_latitude FLOAT,
-        artist_longitude FLOAT,
+        artist_latitude DOUBLE PRECISION,
+        artist_longitude DOUBLE PRECISION,
         artist_location VARCHAR,
         artist_name VARCHAR,
         song_id VARCHAR,
         title VARCHAR,
-        duration DECIMAL,
+        duration DOUBLE PRECISION,
         year SMALLINT
     );
 """)
+
+
+# Fact Table: songplays
 
 songplay_table_create = ("""
     CREATE TABLE IF NOT EXISTS songplays (
         songplay_id INTEGER IDENTITY(0,1) PRIMARY KEY,
         start_time TIMESTAMP NOT NULL,
-        user_id INTEGER NOT NULL,
-        level VARCHAR,
-        song_id VARCHAR,
-        artist_id VARCHAR,
+        user_id INTEGER NOT NULL REFERENCES users(user_id),
+        level VARCHAR(10),
+        song_id VARCHAR REFERENCES songs(song_id),
+        artist_id VARCHAR REFERENCES artists(artist_id),
         session_id INTEGER,
         location VARCHAR,
         user_agent VARCHAR
     );
 """)
 
+
+# Dimension Tables: users, songs, artists, time
+
 user_table_create = ("""
     CREATE TABLE IF NOT EXISTS users (
         user_id INTEGER PRIMARY KEY,
-        first_name VARCHAR,
-        last_name VARCHAR,
-        gender VARCHAR,
-        level VARCHAR
+        first_name VARCHAR(100),
+        last_name VARCHAR(100),
+        gender VARCHAR(10),
+        level VARCHAR(10)
     );
 """)
 
@@ -87,16 +92,16 @@ song_table_create = ("""
     CREATE TABLE IF NOT EXISTS songs (
         song_id VARCHAR PRIMARY KEY,
         title VARCHAR,
-        artist_id VARCHAR,
+        artist_id VARCHAR REFERENCES artists(artist_id),
         year SMALLINT,
-        duration DECIMAL
+        duration DECIMAL(10,5)
     );
 """)
 
 artist_table_create = ("""
     CREATE TABLE IF NOT EXISTS artists (
         artist_id VARCHAR PRIMARY KEY,
-        name VARCHAR,
+        name VARCHAR(255),
         location VARCHAR,
         latitude DECIMAL(9,6),
         longitude DECIMAL(9,6)
@@ -106,12 +111,12 @@ artist_table_create = ("""
 time_table_create = ("""
     CREATE TABLE IF NOT EXISTS time (
         start_time TIMESTAMP PRIMARY KEY,
-        hour INTEGER,
-        day INTEGER,
-        week INTEGER,
-        month INTEGER,
-        year INTEGER,
-        weekday INTEGER
+        hour SMALLINT,
+        day SMALLINT,
+        week SMALLINT,
+        month SMALLINT,
+        year SMALLINT,
+        weekday SMALLINT
     );
 """)
 
