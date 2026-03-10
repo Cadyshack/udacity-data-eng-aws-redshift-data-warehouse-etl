@@ -1,3 +1,8 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
 [project]
 name = "udacity-data-eng-aws-redshift-data-warehouse-etl"
 version = "0.1.0"
