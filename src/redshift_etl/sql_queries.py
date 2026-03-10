@@ -1,4 +1,4 @@
-from scripts.config_helper import get_config
+from redshift_etl.scripts.config_helper import get_config
 
 # CONFIG
 config = get_config()
