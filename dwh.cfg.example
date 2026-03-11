@@ -1,12 +1,12 @@
 [AWS]
-KEY=
-SECRET=
+KEY= <AWS_KEY>
+SECRET= <AWS_SECRET_KEY>
 
 [CLUSTER]
 HOST =
-DB_NAME = 
-DB_USER = 
-DB_PASSWORD = 
+DB_NAME = dwh
+DB_USER = dwhuser
+DB_PASSWORD = <SOME PASSWORD>
 DB_PORT = 5439
 CLUSTER_IDENTIFIER = cc-redshift-cluster
 CLUSTER_TYPE = multi-node
@@ -14,7 +14,7 @@ NODE_TYPE = ra3.xlplus
 NUM_NODES = 2
 
 [IAM_ROLE]
-ROLE_ARN = ''
+ROLE_ARN =
 ROLE_NAME = ccRedshiftRole
 
 [SECURITY_GROUP]
