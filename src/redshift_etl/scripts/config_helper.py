@@ -4,7 +4,7 @@ from pathlib import Path
 
 def get_config_path(filename='dwh.cfg'):
     """Return the absolute Path to the config file."""
-    config_path = Path(__file__).resolve().parent.parent / filename
+    config_path = Path(__file__).resolve().parent.parent.parent.parent / filename
     if not config_path.exists():
         raise FileNotFoundError(f"Config file not found: {config_path}")
     return config_path
