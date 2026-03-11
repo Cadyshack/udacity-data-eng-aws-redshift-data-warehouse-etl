@@ -119,7 +119,7 @@ wheels = [
 [[package]]
 name = "udacity-data-eng-aws-redshift-data-warehouse-etl"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "boto3" },
     { name = "psycopg", extra = ["binary"] },
