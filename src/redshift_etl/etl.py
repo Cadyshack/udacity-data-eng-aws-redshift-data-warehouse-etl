@@ -1,5 +1,5 @@
 import psycopg
-from redshift_etl.scripts.config_helper import get_config, get_config_path
+from redshift_etl.scripts.config_helper import get_config
 from redshift_etl.sql.sql_queries import copy_table_queries, insert_table_queries
 from redshift_etl.sql.data_quality import data_quality_checks
 
@@ -46,11 +46,13 @@ def main():
     DB_PORT = config.get('CLUSTER', 'DB_PORT')
 
     conn = psycopg.connect("host={} dbname={} user={} password={} port={}".format(HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT))
+    
     cur = conn.cursor()
     
     load_staging_tables(cur, conn)
     insert_tables(cur, conn)
-    run_quality_checks(cur, conn)
+    run_quality_checks(cur)
+
     conn.close()
 
 
