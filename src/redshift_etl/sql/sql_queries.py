@@ -64,8 +64,8 @@ staging_songs_table_create = ("""
 songplay_table_create = ("""
     CREATE TABLE IF NOT EXISTS songplays (
         songplay_id INTEGER IDENTITY(0,1) PRIMARY KEY,
-        start_time TIMESTAMP NOT NULL,
-        user_id INTEGER NOT NULL REFERENCES users(user_id),
+        start_time TIMESTAMP NOT NULL SORTKEY,
+        user_id INTEGER NOT NULL REFERENCES users(user_id) DISTKEY,
         level VARCHAR(10),
         song_id VARCHAR REFERENCES songs(song_id),
         artist_id VARCHAR REFERENCES artists(artist_id),
@@ -80,7 +80,7 @@ songplay_table_create = ("""
 
 user_table_create = ("""
     CREATE TABLE IF NOT EXISTS users (
-        user_id INTEGER PRIMARY KEY NOT NULL,
+        user_id INTEGER PRIMARY KEY NOT NULL SORTKEY DISTKEY,
         first_name VARCHAR(100),
         last_name VARCHAR(100),
         gender VARCHAR(10),
@@ -90,34 +90,37 @@ user_table_create = ("""
 
 song_table_create = ("""
     CREATE TABLE IF NOT EXISTS songs (
-        song_id VARCHAR PRIMARY KEY NOT NULL,
+        song_id VARCHAR PRIMARY KEY NOT NULL SORTKEY,
         title VARCHAR,
         artist_id VARCHAR REFERENCES artists(artist_id),
         year SMALLINT,
         duration DECIMAL(10,5)
-    );
+    )
+    DISTSTYLE ALL;
 """)
 
 artist_table_create = ("""
     CREATE TABLE IF NOT EXISTS artists (
-        artist_id VARCHAR PRIMARY KEY NOT NULL,
+        artist_id VARCHAR PRIMARY KEY NOT NULL SORTKEY,
         name VARCHAR(255),
         location VARCHAR,
         latitude DECIMAL(9,6),
         longitude DECIMAL(9,6)
-    );
+    )
+    DISTSTYLE ALL;
 """)
 
 time_table_create = ("""
     CREATE TABLE IF NOT EXISTS time (
-        start_time TIMESTAMP PRIMARY KEY NOT NULL,
+        start_time TIMESTAMP PRIMARY KEY NOT NULL SORTKEY,
         hour SMALLINT,
         day SMALLINT,
         week SMALLINT,
         month SMALLINT,
         year SMALLINT,
         weekday SMALLINT
-    );
+    )
+    DISTSTYLE ALL;
 """)
 
 # STAGING TABLES
