@@ -152,7 +152,7 @@ songplay_table_insert = ("""
                     ed.location AS location,
                     ed.userAgent AS user_agent
     FROM events_data AS ed
-    JOIN song_data AS sd
+    LEFT JOIN song_data AS sd
         ON ed.song = sd.title
         AND ed.artist = sd.artist_name
         AND ed.length = sd.duration
