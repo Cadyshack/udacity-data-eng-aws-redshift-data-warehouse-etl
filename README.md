@@ -58,7 +58,7 @@ flowchart TD
     subgraph VPC ["Default VPC"]
         SG["Security Group<br>redshift_security_group<br>Inbound TCP :5439"]
 
-        subgraph Cluster ["Redshift Cluster (ra3.xlplus - 2 nodes)"]
+        subgraph Cluster ["Redshift Cluster"]
             direction TB
             subgraph Staging ["Staging Layer"]
                 ED["events_data"]
@@ -81,6 +81,11 @@ flowchart TD
 
     PY2["🐍 create_tables.py"]    -->|"DDL  DROP / CREATE"| Cluster
 
+    PY4["🐍 etl.py"]
+    PY4 -->|"① load_staging_tables"| Staging
+    PY4 -->|"② insert_tables"| Star
+    PY4 -->|"③ run_quality_checks"| DQ["🐍 data_quality.py<br>✓ row counts<br>✓ referential integrity<br>✓ duplicate detection"]
+
     LOG  -->|"COPY JSON"| ED
     SONG -->|"COPY JSON auto"| SD
     ROLE -.->|"grants S3 read"| LOG
@@ -91,8 +96,6 @@ flowchart TD
     ED  -->|"INSERT … SELECT"| TM
     SD  -->|"INSERT … SELECT + ROW_NUMBER()"| SO
     SD  -->|"INSERT … SELECT + ROW_NUMBER()"| AR
-
-    SP  -->|"15 automated checks"| DQ["🐍 data_quality.py<br>✓ row counts<br>✓ referential integrity<br>✓ duplicate detection"]
 
     PY3["🐍 teardown_infra.py"]   -->|"boto3: delete"| Cluster
     PY3                            -->|"boto3: delete"| SG
