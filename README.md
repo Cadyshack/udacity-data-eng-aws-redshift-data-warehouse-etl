@@ -47,18 +47,18 @@ This project delivers:
 ```mermaid
 flowchart TD
     subgraph S3 ["Amazon S3  (us-west-2)"]
-        LOG["📁 log_data/\nJSON user activity logs"]
-        SONG["📁 song_data/\nJSON song & artist metadata"]
+        LOG["📁 log_data/<br>JSON user activity logs"]
+        SONG["📁 song_data/<br>JSON song & artist metadata"]
     end
 
     subgraph IAM ["AWS IAM"]
-        ROLE["IAM Role: ccRedshiftRole\nAmazonS3ReadOnlyAccess"]
+        ROLE["IAM Role: ccRedshiftRole<br>AmazonS3ReadOnlyAccess"]
     end
 
     subgraph VPC ["Default VPC"]
-        SG["Security Group\nredshift_security_group\nInbound TCP :5439"]
+        SG["Security Group<br>redshift_security_group<br>Inbound TCP :5439"]
 
-        subgraph Cluster ["Redshift Cluster  ·  ra3.xlplus × 2 nodes"]
+        subgraph Cluster ["Redshift Cluster (ra3.xlplus - 2 nodes)"]
             direction TB
             subgraph Staging ["Staging Layer"]
                 ED["events_data"]
