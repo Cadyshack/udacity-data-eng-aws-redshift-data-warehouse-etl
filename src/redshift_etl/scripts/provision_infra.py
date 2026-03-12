@@ -2,7 +2,7 @@ import boto3
 import json
 
 from botocore.exceptions import WaiterError, ClientError
-from config_helper import get_config, get_config_path
+from redshift_etl.scripts.config_helper import get_config, get_config_path
 
 
 # ---------------------------------------------------------------------------
@@ -215,6 +215,7 @@ def create_redshift_cluster(redshift, config, config_path, role_arn, sg_id):
             Port=db_port,
             IamRoles=[role_arn],
             VpcSecurityGroupIds=[sg_id],
+            PubliclyAccessible=True,
         )
         if cluster_type == 'multi-node':
             create_kwargs['NumberOfNodes'] = num_nodes

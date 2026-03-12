@@ -2,7 +2,7 @@ import boto3
 import time
 
 from botocore.exceptions import WaiterError, ClientError
-from config_helper import get_config, get_config_path
+from redshift_etl.scripts.config_helper import get_config, get_config_path
 
 
 # ---------------------------------------------------------------------------

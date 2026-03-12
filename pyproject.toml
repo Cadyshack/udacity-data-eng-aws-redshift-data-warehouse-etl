@@ -1,9 +1,30 @@
 [project]
 name = "udacity-data-eng-aws-redshift-data-warehouse-etl"
 version = "0.1.0"
+description = "Udacity Data Engineering Capstone Project: AWS Redshift Data Warehouse ETL"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Christian" }
+]
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "boto3>=1.42.59",
     "psycopg[binary]>=3.3.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/redshift_etl"]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.10.8",
+    "pandas>=3.0.1",
+    "seaborn>=0.13.2",
 ]
