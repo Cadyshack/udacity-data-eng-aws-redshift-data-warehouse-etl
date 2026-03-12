@@ -92,7 +92,7 @@ flowchart TD
     SD  -->|"INSERT … SELECT + ROW_NUMBER()"| SO
     SD  -->|"INSERT … SELECT + ROW_NUMBER()"| AR
 
-    SP  -->|"15 automated checks"| DQ["🐍 data_quality.py\n✓ row counts\n✓ referential integrity\n✓ duplicate detection"]
+    SP  -->|"15 automated checks"| DQ["🐍 data_quality.py<br>✓ row counts<br>✓ referential integrity<br>✓ duplicate detection"]
 
     PY3["🐍 teardown_infra.py"]   -->|"boto3: delete"| Cluster
     PY3                            -->|"boto3: delete"| SG
@@ -143,6 +143,11 @@ udacity-data-eng-aws-redshift-data-warehouse-etl/
 ├── pyproject.toml                 # Project metadata, dependencies (uv / hatchling)
 ├── LICENSE
 ├── README.md
+├── assets/
+│   └── images/
+│       ├── provision.png                  # Terminal output screenshot: provisioning
+│       ├── teardown.png                   # Terminal output screenshot: teardown
+│       └── data-quality-check-result.png  # Terminal output screenshot: quality checks
 ├── notebooks/
 │   └── analytics_dashboard.ipynb  # Exploratory analysis & visualisations
 └── src/
@@ -264,6 +269,8 @@ This performs three sequential phases:
 ```bash
 uv run jupyter lab notebooks/analytics_dashboard.ipynb
 ```
+
+You can also look at the saved [jupyter notebook](https://github.com/Cadyshack/udacity-data-eng-aws-redshift-data-warehouse-etl/blob/docs/readme/notebooks/analytics_dashboard.ipynb) output directly in GitHub.
 
 ### 7. Tear down infrastructure
 
