@@ -481,4 +481,3 @@ This project is licensed under the MIT License — see [LICENSE](LICENSE) for de
 **Christian Cadieux**
 
 Built as part of the [Udacity Data Engineering Nanodegree](https://www.udacity.com/course/data-engineering-nanodegree--nd027) program.
-
