@@ -189,12 +189,34 @@ udacity-data-eng-aws-redshift-data-warehouse-etl/
 
 - **AWS account** with permissions to create IAM roles, EC2 security groups, and Redshift clusters.
 - **AWS access key** (Key ID + Secret) stored in `dwh.cfg` (never committed to source control, copy `dwh.cfg.example`).
+- The Redshift cluster is created in **us-west-2** since the Udacity S3 buckets are in that region.
 - **Python ≥ 3.14** and **uv** installed locally.
-  ```bash
-  # Install uv (macOS / Linux)
-  curl -LsSf https://astral.sh/uv/install.sh | sh
-  ```
-- The Redshift cluster must be in **us-west-2** (the Udacity S3 buckets are in that region).
+
+### uv instilation
+
+For full uv instilation guid go to [https://docs.astral.sh/uv/getting-started/installation/](https://docs.astral.sh/uv/getting-started/installation/)
+
+#### macOS and Linux
+
+Use `curl` to download the script and execute it with sh:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+If your system doesn't have `curl`, you can use `wget`:
+
+```bash
+wget -qO- https://astral.sh/uv/install.sh | sh
+```
+
+#### Windows
+
+Use `irm` to download the script and execute it with `iex`:
+
+```bash
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
 
 ---
 
