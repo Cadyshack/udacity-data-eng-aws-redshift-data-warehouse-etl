@@ -4,12 +4,32 @@ from redshift_etl.sql.sql_queries import create_table_queries, drop_table_querie
 
 
 def drop_tables(cur, conn):
+    """
+    Drops all tables specified in the drop_table_queries list from the database.
+    
+    Args:
+        cur: The database cursor object used to execute SQL queries.
+        conn: The database connection object used to commit transactions.
+    Returns:
+        None
+    """
+
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    """
+    Executes a list of SQL table creation queries using the provided database cursor and connection.
+
+    Args:
+        cur: Database cursor object used to execute SQL queries.
+        conn: Database connection object used to commit transactions.
+    Returns:
+        None    
+    """
+
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()

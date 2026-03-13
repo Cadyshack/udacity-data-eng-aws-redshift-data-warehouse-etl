@@ -5,17 +5,44 @@ from redshift_etl.sql.data_quality import data_quality_checks
 
 
 def load_staging_tables(cur, conn):
+    """
+    Executes a series of SQL COPY queries to load data into staging tables in a Redshift database.
+    It iterates over the `copy_table_queries` list, executing each query using the provided database cursor (`cur`) and commits the transaction after each execution to ensure that the data is properly loaded into the staging tables.
+    Args:
+        cur: The database cursor object used to execute SQL queries.
+        conn: The database connection object used to commit transactions.
+    Returns:
+        None
+    """
+
     for query in copy_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def insert_tables(cur, conn):
+    """
+    Executes a series of SQL INSERT queries to load data into fact and dimension tables in a Redshift database.
+    It iterates over the `insert_table_queries` list, executing each query using the provided database cursor (`cur`) and commits the transaction after each execution to ensure that the data is properly loaded into the tables.
+    Args:
+        cur: The database cursor object used to execute SQL queries.
+        conn: The database connection object used to commit transactions.
+    Returns:
+        None
+    """
     for query in insert_table_queries:
         cur.execute(query)
         conn.commit()
 
 def run_quality_checks(cur):
+    """
+    Executes a series of data quality checks on the Redshift database.
+    It iterates over the `data_quality_checks` list, executing each check using the provided database cursor (`cur`) and prints the results.
+    Args:
+        cur: The database cursor object used to execute SQL queries.
+    Returns:
+        None
+    """
     print("\n--- Running Data Quality Checks ---\n")
     failed = 0
     passed = 0
